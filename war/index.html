@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>AJAX JQUERY Test</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <h1>Obtener texto y mostarlo en un alert</h1>
+	<input type="button" value="obtener" onclick="execute_get();" />
+  
+  
+  	<h1>Someter una forma en ajax y ver el resultado</h1>
+  	
+  	<form style="forma_style"
+  		id="forma" action="/postexample" method="post">
+  		<p>Nombre:</p>
+  		<input type="text" id="nombre" name="nombre">
+  		<input type="button" value="Enviar" onclick="someterForma();">
+  	</form>
+    
+  </body>
+  <script type="text/javascript" 
+  	src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" >
+  </script>
+  
+  <script type="text/javascript">
+  	
+  /***
+  *	funcion que manda una llamada GET a la pagina (servlet) ajax_jquery_example
+  * y el resultado de ese proceso lo muestra en un alert de java script
+  */
+  	function execute_get(){
+  		$.get('ajax_jquery_example',function(data){alert(data);});
+  	}
+  /****
+  * funcion que somete la forma al servlet postexample y muestra en un alert
+  * el resultado. El resultado puede ser agregado a un div, tabla, etc no 
+  * necesariamente mostrado en un alert.
+  */
+  function someterForma(){
+	  $.post('postexample'
+			  ,$('#forma').serialize()
+			  ,function(data){
+		  			alert(data);
+		  			//limpiar los valores de la forma
+		  			document.getElementById('forma').reset(0);
+		  		});
+  }
+  
+  </script>
+  
+</html>
